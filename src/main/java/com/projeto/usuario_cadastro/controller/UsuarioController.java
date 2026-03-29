@@ -1,6 +1,7 @@
 package com.projeto.usuario_cadastro.controller;
 
 import com.projeto.usuario_cadastro.business.UsuarioService;
+import com.projeto.usuario_cadastro.infrastructure.dto.UsuarioUpdateDTO;
 import com.projeto.usuario_cadastro.infrastructure.entitys.Usuario;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -31,9 +32,9 @@ public class UsuarioController {
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping
+   @PutMapping
     public ResponseEntity<Void> atualizarUsuarioPorId(@RequestParam Integer id,
-                                                      @Valid @RequestBody Usuario usuario) {
+                                                  @Valid @RequestBody UsuarioUpdateDTO usuario) {
         usuarioService.atualizarUsuarioPorId(id, usuario);
         return ResponseEntity.ok().build();
     }

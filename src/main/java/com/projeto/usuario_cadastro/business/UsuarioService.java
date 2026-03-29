@@ -1,5 +1,6 @@
 package com.projeto.usuario_cadastro.business;
 
+import com.projeto.usuario_cadastro.infrastructure.dto.UsuarioUpdateDTO;
 import com.projeto.usuario_cadastro.infrastructure.entitys.Usuario;
 import com.projeto.usuario_cadastro.infrastructure.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
@@ -29,23 +30,21 @@ public class UsuarioService {
         repository.deleteByEmail(email);
     }
 
-    public void atualizarUsuarioPorId(Integer id,Usuario usuario){
-        Usuario usuarioEntity = repository.findById(id). orElseThrow(() ->
-                new RuntimeException("Usuário não encontrado"));
+   public void atualizarUsuarioPorId(Integer id, UsuarioUpdateDTO usuario) {
+        Usuario usuarioEntity = repository.findById(id).orElseThrow(() ->
+            new RuntimeException("Usuário não encontrado"));
         Usuario usuarioAtualizado = Usuario.builder()
-                .email(usuario.getEmail() != null ?
-                        usuario.getEmail() : usuarioEntity.getEmail())
-                .nome(usuario.getNome() != null ?
-                        usuario.getNome() : usuarioEntity.getNome())
-                .telefone(usuario.getTelefone() != null ?
-                        usuario.getTelefone() : usuarioEntity.getTelefone())
-                .id(usuarioEntity.getId())
-                .build();
+            .email(usuario.getEmail() != null ?
+                    usuario.getEmail() : usuarioEntity.getEmail())
+            .nome(usuario.getNome() != null ?
+                    usuario.getNome() : usuarioEntity.getNome())
+            .telefone(usuario.getTelefone() != null ?
+                    usuario.getTelefone() : usuarioEntity.getTelefone())
+            .id(usuarioEntity.getId())
+            .build();
 
         repository.saveAndFlush(usuarioAtualizado);
-
-    }
-
+}
 }
 
 
